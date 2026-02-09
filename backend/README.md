@@ -10,3 +10,8 @@ Responsibilities:
 Note:
 This layer does NOT contain survival modeling or
 rescue prioritization logic.
+
+## API Flow
+1. Receive worker/environment data
+2. Invoke intelligence layer
+3. Return ranked rescue priorities
