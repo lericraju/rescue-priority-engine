@@ -79,6 +79,10 @@ The system is designed to operate with **noisy, incomplete, and degrading data**
 Work is divided by system layers to ensure clear ownership and modular development.
 
 ---
+## Interfaces
+- React dashboard for rescue priority visualization
+- Flutter mobile prototype for field access
+- Designed for clarity and rapid decision support
 
 ## Project Scope
 - Prototype-level system
