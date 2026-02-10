@@ -1,10 +1,12 @@
 from intelligence.inference import estimate_survival
 from intelligence.prioritization.priority_engine import prioritize_workers
-from simulation.synthetic_generator import generate_scenario
 
 
-def compute_rescue_priorities():
-    workers = generate_scenario()
+def compute_rescue_priorities(workers: list) -> list:
+    """
+    Computes survival probability and rescue priority
+    for a list of workers.
+    """
 
     for w in workers:
         w["survival_probability"] = estimate_survival(
