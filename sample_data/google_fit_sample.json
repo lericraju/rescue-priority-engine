@@ -1,0 +1,14 @@
+{
+  "heart_rate_samples": [
+    {
+      "user_id": "Worker_A",
+      "bpm": 92,
+      "immobile_minutes": 6
+    },
+    {
+      "user_id": "Worker_B",
+      "bpm": 110,
+      "immobile_minutes": 18
+    }
+  ]
+}
