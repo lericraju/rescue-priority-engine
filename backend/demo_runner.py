@@ -43,3 +43,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Example:
+# workers = parse_heart_rate_export("sample_export.json")
+
