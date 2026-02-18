@@ -36,8 +36,10 @@ def main():
 
     print("\nRescue Priority Result:\n")
     for w in ranked:
-        print(w)
-
+    print(f"ID: {w['id']}")
+    print(f"  Survival Probability: {w['survival_probability']:.2f}")
+    print(f"  Priority Rank: {w['priority']}")
+    print("-" * 30)
 
 if __name__ == "__main__":
     main()
