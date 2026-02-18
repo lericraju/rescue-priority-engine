@@ -101,6 +101,15 @@ Final rescue decisions must always remain under human authority and established 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
+---
+
+## Current Status
+
+This repository represents a stable prototype version of the
+Rescue Priority Engine with working end-to-end execution
+of survival estimation and rescue prioritization logic.
+
+
 
 
 
