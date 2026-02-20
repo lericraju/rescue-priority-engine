@@ -1,22 +1,40 @@
 import json
 
 
-def parse_heart_rate_export(file_path: str) -> list:
+def parse_fastrack_heart_rate(file_path: str) -> list:
     """
-    Parses Google Fit heart rate export JSON file
-    and extracts simplified worker heart rate data.
+    Parses Google Takeout heart rate JSON from Fastrack device
+    and converts it into a single worker profile
+    using aggregated statistics.
     """
 
     with open(file_path, "r") as f:
         data = json.load(f)
 
-    workers = []
+    heart_rates = []
 
-    for entry in data.get("heart_rate_samples", []):
-        workers.append({
-            "id": entry.get("user_id", "Unknown"),
-            "heart_rate": entry.get("bpm", 0),
-            "immobile_minutes": entry.get("immobile_minutes", 0),
-        })
+    for point in data.get("Data Points", []):
+        try:
+            bpm = point["fitValue"][0]["value"]["fpVal"]
+            heart_rates.append(bpm)
+        except (KeyError, IndexError):
+            continue
 
-    return workers
+    if not heart_rates:
+        raise ValueError("No heart rate data found.")
+
+    # Basic aggregation
+    avg_hr = sum(heart_rates) / len(heart_rates)
+    max_hr = max(heart_rates)
+
+    worker = {
+        "id": "Fastrack_User",
+        "heart_rate": round(avg_hr),
+        "immobile_minutes": 10,  # placeholder (can improve later)
+        "gas_ppm": 150,
+        "gas_exposure_minutes": 12,
+        "oxygen_percent": 15.0,
+        "hypoxia_minutes": 18,
+    }
+
+    return [worker]
