@@ -1,14 +1,20 @@
+
 from backend.data_ingestion.google_fit_parser import parse_fastrack_heart_rate
+=======
+
 from backend.api.rescue_service import compute_rescue_priorities
 
 
 def main():
+
 
     # OPTION 1 — Real Fastrack heart rate data
     workers = parse_fastrack_heart_rate("fastrack_heart_rate.json")
 
     # OPTION 2 — Manual demo data (disabled)
     """
+=======
+
     workers = [
         {
             "id": "Worker_A",
@@ -38,11 +44,15 @@ def main():
             "hypoxia_minutes": 10,
         },
     ]
+
     """
+=======
+
 
     ranked = compute_rescue_priorities(workers)
 
     print("\nRescue Priority Result:\n")
+
 
     for w in ranked:
         print(f"ID: {w['id']}")
@@ -53,3 +63,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+=======
+    for w in ranked:
+    print(f"ID: {w['id']}")
+    print(f"  Survival Probability: {w['survival_probability']:.2f}")
+    print(f"  Priority Rank: {w['priority']}")
+    print("-" * 30)
+
+if __name__ == "__main__":
+    main()
+
+# Example:
+# workers = parse_heart_rate_export("sample_export.json")
+
+
