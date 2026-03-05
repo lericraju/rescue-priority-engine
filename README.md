@@ -138,9 +138,9 @@ Priority Rank: 3
 
 | Member | Role | Responsibilities |
 |--------|------|-----------------|
-| Member 1 | Intelligence Lead | Survival modeling & rescue prioritization logic |
-| Member 2 | Backend & Simulation Lead | Django APIs & synthetic disaster generation |
-| Member 3 | Interface & Documentation Lead | React dashboard, Flutter app & documentation |
+| Member 1 | Leric Raju (2409308) | Intelligence Lead | Survival modeling & rescue prioritization logic |
+| Member 2 | Mohammed Yusuf (2410309)  | Backend & Simulation Lead | Django APIs & synthetic disaster generation |
+| Member 3 | Tabish Matwankar (2410672) | Interface & Documentation Lead | React dashboard, Flutter app & documentation |
 
 Responsibilities are divided by system layer for clear ownership and modular development.
 
