@@ -2,15 +2,10 @@ import json
 
 
 def parse_fastrack_heart_rate(file_path: str) -> list:
-=======
-
-def parse_fastrack_heart_rate(file_path: str) -> list:
     """
-    Parses Google Takeout heart rate JSON from Fastrack device
-    and converts it into a single worker profile
-    using aggregated statistics.
+    Parse Google Takeout heart rate JSON from a Fastrack device
+    and convert it into a worker profile for the rescue engine.
     """
-
 
     with open(file_path, "r") as f:
         data = json.load(f)
@@ -25,36 +20,22 @@ def parse_fastrack_heart_rate(file_path: str) -> list:
             continue
 
     if not heart_rates:
+        raise ValueError("No heart rate data found in Google Takeout file.")
 
-        raise ValueError("No heart rate data found")
-
-    avg_hr = sum(heart_rates) / len(heart_rates)
-=======
-        raise ValueError("No heart rate data found.")
-
-    # Basic aggregation
+    # Aggregate statistics
     avg_hr = sum(heart_rates) / len(heart_rates)
     max_hr = max(heart_rates)
-
 
     worker = {
         "id": "Fastrack_User",
         "heart_rate": round(avg_hr),
 
+        # Placeholder environmental + activity data
         "immobile_minutes": 10,
-=======
-        "immobile_minutes": 10,  # placeholder (can improve later)
-
         "gas_ppm": 150,
         "gas_exposure_minutes": 12,
         "oxygen_percent": 15.0,
         "hypoxia_minutes": 18,
     }
 
-
     return [worker]
-=======
-
-    #syncing google takeout with dataset
-    return [worker]
-
