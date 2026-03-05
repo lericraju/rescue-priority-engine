@@ -1,115 +1,188 @@
-# Rescue Priority Engine
-
-# LASTBREATH
-
-## Overview
-Rescue Priority Engine is a prototype decision-support system designed to assist rescue teams during underground mine disasters.  
+LASTBREATH — Rescue Priority Engine
+Overview
+Rescue Priority Engine is a prototype decision-support system designed to assist rescue teams during underground mine disasters.
 The system computes survival probability estimates for trapped workers and dynamically prioritizes rescue order using physiological proxies and simulated environmental conditions.
+The focus of this project is decision-making under uncertainty, not hardware deployment.
 
-The focus of this project is **decision-making under uncertainty**, not hardware deployment.
-
----
-
-## Problem Statement
+Problem Statement
 During mine disasters such as collapses, explosions, or ventilation failures, rescue teams face:
-- Limited time and oxygen
-- Incomplete and degrading information
-- Inability to rescue all trapped workers simultaneously
-
-Most existing systems focus on detection and monitoring, but **do not assist in deciding whom to rescue first**.
-
+Limited time and oxygen
+Incomplete and degrading information
+Inability to rescue all trapped workers simultaneously
+Most existing systems focus on detection and monitoring, but do not assist in deciding whom to rescue first.
 This project addresses that gap by introducing a structured rescue prioritization engine.
 
----
-
-## Solution Approach
-The system estimates a **dynamic survival probability** for each trapped worker and ranks rescue priorities based on:
-- Physiological condition (heart rate, movement/immobility)
-- Simulated environmental stress (oxygen depletion, gas exposure)
-- Rescue feasibility (accessibility and time constraints)
-
+Solution Approach
+The system estimates a dynamic survival probability for each trapped worker and ranks rescue priorities based on:
+Physiological condition (heart rate, immobility)
+Simulated environmental stress (oxygen depletion, gas exposure)
+Rescue feasibility and accessibility
 The prioritization updates continuously as conditions change.
 
----
+System Architecture
+The system is organized into independent layers to ensure modularity and scalability.
+Intelligence Layer
+Computes survival probability
+Generates rescue priority ranking
+Uses physiological proxies and environmental stress models
+Fully decoupled from UI and backend services
+Backend Coordination Layer
+Handles system orchestration
+Provides APIs for intelligence outputs
+Manages simulation and data ingestion
 
-## System Architecture
-The project is structured into independent layers:
+Interface Layer
+React Dashboard – Command center visualization
+Flutter Mobile App – Lightweight mobile interface for field teams
+Streamlit Dashboard – Prototype visualization interface for demo purposes
 
-### 1. Intelligence Layer
-- Computes survival probability and rescue priority
-- Uses physiological proxies and simulated environmental data
-- Fully decoupled from UI and network layers
+Simulation Layer
+Generates synthetic disaster scenarios
+Simulates oxygen decay, gas exposure, and stress progression
 
-### 2. Backend Coordination Layer (Django)
-- Exposes APIs for intelligence outputs
-- Manages scenario selection and demo flow
-- Contains no decision logic
+Architecture Flow
+Wearable Device (Smartwatch)
+            ↓
+      Data Ingestion Layer
+            ↓
+      Intelligence Engine
+  (Survival Probability Models)
+            ↓
+     Rescue Priority Engine
+            ↓
+        Backend APIs
+            ↓
+    Visualization Interfaces
+ (Dashboard / Mobile / Command Center)
+ 
+Data Strategy
+This project is a prototype system and does not depend on specialized rescue hardware.
+Physiological Data
+Physiological signals are obtained from consumer-grade wearable devices such as smartwatches.
+Example signals include:
+Heart rate
+Motion / immobility
+These signals are treated as physiological proxies, not medical-grade measurements.
 
-### 3. Interface Layer
-- **React Dashboard:** Command-center visualization
-- **Flutter App:** Simplified mobile view for field demonstration
+Environmental Data
+Environmental conditions are simulated using decay and stress models representing:
+Oxygen depletion
+Gas concentration
+Time-based survival degradation
+The system is intentionally designed to operate with noisy, incomplete, and degrading data, reflecting real disaster environments.
 
-### 4. Simulation Layer
-- Generates synthetic disaster scenarios
-- Simulates gas exposure, oxygen decay, and time-based stress
+Tech Stack
+Core technologies used in the project:
+Python – Core system implementation
+Streamlit – Visualization dashboard
+Django – Backend API layer
+React – Command-center interface prototype
+Flutter – Mobile interface prototype
 
----
+Key engineering concepts:
+Modular system architecture
+Decision intelligence
+Survival probability modeling
+Data ingestion pipelines
 
-## Data Strategy
-This project is a **prototype** and does not rely on specialized hardware.
+Project Structure
+rescue-priority-engine
+│
+├── intelligence
+│   ├── survival_models
+│   ├── prioritization
+│   └── inference.py
+│
+├── backend
+│   ├── api
+│   ├── data_ingestion
+│   └── demo_runner.py
+│
+├── simulation
+│
+├── frontend
+│   └── react_dashboard
+│
+├── mobile
+│   └── flutter_app
+│
+├── docs
+│
+├── dashboard.py
+└── README.md
 
-### Physiological Data
-- Obtained from consumer-grade smartwatches (e.g., heart rate and motion)
-- Used as physiological **proxies**, not medical-grade measurements
+Running the Demo
 
-### Environmental Data
-- Simulated using decay and stress models
-- Represents gas concentration, oxygen depletion, and temperature rise
+Run Core Rescue Engine
+python -m backend.demo_runner
 
-The system is designed to operate with **noisy, incomplete, and degrading data**, reflecting real disaster conditions.
+This executes the rescue prioritization pipeline and prints the ranked rescue order.
+Run Visualization Dashboard
+streamlit run dashboard.py
+This launches a lightweight rescue command dashboard displaying survival probability and rescue priority rankings.
+Example Output
 
+Example output from the rescue engine:
+Rescue Priority Result
 
----
+ID: Worker_B
+Survival Probability: 0.49
+Priority Rank: 1
+-------------------------
 
-## Team Responsibilities
-- **Member 1 (Intelligence Lead):** Survival modeling and rescue prioritization logic  
-- **Member 2 (Backend & Simulation Lead):** Django APIs and synthetic disaster generation  
-- **Member 3 (Interface & Documentation Lead):** React dashboard, Flutter app, and documentation  
+ID: Worker_A
+Survival Probability: 0.61
+Priority Rank: 2
+-------------------------
 
-Work is divided by system layers to ensure clear ownership and modular development.
+ID: Worker_C
+Survival Probability: 0.89
+Priority Rank: 3
+-------------------------
 
----
-## Interfaces
-- React dashboard for rescue priority visualization
-- Flutter mobile prototype for field access
-- Designed for clarity and rapid decision support
+The worker with the lowest survival probability receives the highest rescue priority.
 
-## Project Scope
-- Prototype-level system
-- Focus on architecture, logic, and decision-making
-- No real-time deployment claims
-- No specialized hardware dependency
+Team Responsibilities
+Member 1 – Intelligence Lead
+Survival modeling, prioritization logic, and inference pipeline.
+Member 2 – Backend & Simulation Lead
+Django APIs, system orchestration, and synthetic disaster generation.
+Member 3 – Interface & Documentation Lead
+React dashboard, Flutter mobile interface, and system documentation.
+Work is divided by system layers to maintain clear ownership and modular development.
 
----
+Interfaces
+The system supports multiple visualization layers:
+React Dashboard – Rescue command center interface
+Flutter Mobile App – Simplified field access interface
+Streamlit Dashboard – Demonstration dashboard for system output
+These interfaces display rescue priorities generated by the intelligence engine.
 
-## Disclaimer
-This project is intended for academic and demonstration purposes only.  
-Final rescue decisions must always remain under human authority and established safety protocols.
+Project Scope
+This project focuses on:
+Prototype-level system design
+Decision-support logic
+Architecture and modularity
+The project does not claim real-world deployment readiness.
 
----
+Future Improvements
+Possible extensions for future development:
+Real-time wearable sensor integration
+Environmental IoT sensor inputs
+Dynamic rescue path optimization
+Machine learning survival prediction models
+Live disaster simulation environment
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+Disclaimer
+This project is intended for academic and demonstration purposes only.
+All real rescue operations must remain under human supervision and established safety protocols.
 
----
+License
+This project is licensed under the MIT License.
+See the LICENSE file for details.
 
-## Current Status
-
-This repository represents a stable prototype version of the
-Rescue Priority Engine with working end-to-end execution
-of survival estimation and rescue prioritization logic.
-
-
-
-
-
+Current Status
+This repository represents a stable prototype version of the Rescue Priority Engine with working end-to-end execution of:
+Survival estimation
+Rescue prioritization
+Visualization of rescue rankings
