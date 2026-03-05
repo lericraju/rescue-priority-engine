@@ -1,3 +1,6 @@
+# Simple visualization dashboard for rescue priority engine
+# Used for demonstration during project evaluation
+
 import streamlit as st
 from backend.api.rescue_service import compute_rescue_priorities
 
