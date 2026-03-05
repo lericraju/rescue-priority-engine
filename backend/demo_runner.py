@@ -1,7 +1,5 @@
 
 from backend.data_ingestion.google_fit_parser import parse_fastrack_heart_rate
-=======
-
 from backend.api.rescue_service import compute_rescue_priorities
 
 
