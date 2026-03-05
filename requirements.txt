@@ -1,0 +1,5 @@
+# Rescue Priority Engine Dependencies
+
+# Currently using Python standard library only.
+# Add external libraries here if needed in future.
+
