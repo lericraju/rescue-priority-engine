@@ -1,24 +1,10 @@
-def compute_survival_probability(
-    vitals_risk: float,
-    gas_risk: float,
-    hypoxia_risk: float
-) -> float:
+def compute_survival_probability(vital_risk, gas_risk, hypoxia_risk):
     """
-    Combines multiple risk scores into a survival probability.
-    Higher probability = higher chance of survival.
+    Combine risk scores into survival probability.
     """
 
-    # Weights reflect relative severity
-    vitals_weight = 0.3
-    gas_weight = 0.3
-    hypoxia_weight = 0.4
+    total_risk = (vital_risk + gas_risk + hypoxia_risk) / 3
 
-    combined_risk = (
-        vitals_weight * vitals_risk +
-        gas_weight * gas_risk +
-        hypoxia_weight * hypoxia_risk
-    )
+    survival_probability = max(0, 1 - total_risk)
 
-    survival_probability = 1.0 - combined_risk
-
-    return max(0.0, min(survival_probability, 1.0))
+    return survival_probability
