@@ -1,3 +1,22 @@
+from intelligence.prioritization.priority_engine import prioritize_workers
+
+
+def compute_rescue_priorities(workers):
+    """
+    Backend service that connects worker data
+    to the intelligence prioritization engine.
+    """
+
+    ranked_workers = prioritize_workers(workers)
+
+    return ranked_workers
+
+
+
+
+
+
+
 def get_priorities():
     workers = [
         {
