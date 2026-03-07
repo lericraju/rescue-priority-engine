@@ -1,23 +1,16 @@
-def hypoxia_risk_score(oxygen_percent: float, exposure_minutes: int) -> float:
+def compute_hypoxia_risk(worker):
     """
-    Estimates risk due to oxygen deprivation (hypoxia).
-    Higher score = higher risk.
+    Estimate hypoxia risk from oxygen depletion and exposure time.
+    Returns value between 0 and 1.
     """
 
-    risk = 0.0
+    oxygen_percent = worker.get("oxygen_percent", 21)
+    hypoxia_minutes = worker.get("hypoxia_minutes", 0)
 
-    # Oxygen level risk
-    if oxygen_percent < 10:
-        risk += 0.6
-    elif oxygen_percent < 15:
-        risk += 0.4
-    elif oxygen_percent < 19:
-        risk += 0.2
+    oxygen_risk = min((21 - oxygen_percent) / 10, 1)
 
-    # Exposure duration risk
-    if exposure_minutes > 30:
-        risk += 0.4
-    elif exposure_minutes > 10:
-        risk += 0.2
+    time_risk = min(hypoxia_minutes / 60, 1)
 
-    return min(risk, 1.0)
+    hypoxia_risk = (oxygen_risk + time_risk) / 2
+
+    return hypoxia_risk
