@@ -1,18 +1,22 @@
-def prioritize_workers(workers: list) -> list:
+from intelligence.survival_models.survival_probability import compute_survival_probability
+
+
+def prioritize_workers(workers):
     """
-    Prioritizes rescue targets based on survival probability.
-    Higher survival probability = higher rescue priority.
+    Computes survival probability for each worker
+    and ranks them by rescue priority.
     """
 
-    # Defensive copy to avoid mutating input
+    for worker in workers:
+        worker["survival_probability"] = compute_survival_probability(worker)
+
     ranked = sorted(
         workers,
         key=lambda w: w["survival_probability"],
         reverse=True
     )
 
-    # Assign priority rank
-    for idx, worker in enumerate(ranked, start=1):
-        worker["priority"] = idx
+    for i, w in enumerate(ranked):
+        w["priority"] = i + 1
 
     return ranked
