@@ -5,14 +5,24 @@ from backend.api.rescue_service import compute_rescue_priorities
 from backend.data_ingestion.google_fit_parser import parse_fastrack_heart_rate
 
 
-st.title("Mine Rescue Priority Dashboard")
+# Page configuration
+st.set_page_config(
+    page_title="Mine Rescue Decision Support",
+    layout="centered"
+)
 
-st.write("Decision Support System for Rescue Teams")
+# System header
+st.header("Mine Disaster Decision Support System")
+st.caption("AI-assisted rescue prioritization for trapped workers")
 
+
+# Load worker data
 workers = parse_fastrack_heart_rate("fastrack_heart_rate.json")
 
 ranked = compute_rescue_priorities(workers)
 
+
+# Results section
 st.subheader("Rescue Priority Results")
 
 for w in ranked:
@@ -22,8 +32,7 @@ for w in ranked:
     st.write("---")
 
 
-# --- Visualization Section (NEW) ---
-
+# Visualization section
 st.subheader("Survival Probability Visualization")
 
 df = pd.DataFrame(ranked)
