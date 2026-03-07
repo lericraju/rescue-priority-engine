@@ -1,23 +1,16 @@
-def gas_risk_score(gas_ppm: int, exposure_minutes: int) -> float:
+def compute_gas_risk(worker):
     """
-    Estimates risk due to toxic gas exposure.
-    Higher score = higher risk.
+    Estimates risk from toxic gas exposure.
+    Returns a value between 0 and 1.
     """
 
-    risk = 0.0
+    gas_ppm = worker.get("gas_ppm", 0)
+    exposure_minutes = worker.get("gas_exposure_minutes", 0)
 
-    # Gas concentration risk
-    if gas_ppm > 300:
-        risk += 0.5
-    elif gas_ppm > 150:
-        risk += 0.3
-    elif gas_ppm > 50:
-        risk += 0.1
+    ppm_risk = min(gas_ppm / 500, 1)
 
-    # Exposure duration risk
-    if exposure_minutes > 30:
-        risk += 0.4
-    elif exposure_minutes > 10:
-        risk += 0.2
+    exposure_risk = min(exposure_minutes / 60, 1)
 
-    return min(risk, 1.0)
+    gas_risk = (ppm_risk + exposure_risk) / 2
+
+    return gas_risk
