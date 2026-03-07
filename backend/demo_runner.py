@@ -1,9 +1,18 @@
+import logging
 from backend.data_ingestion.google_fit_parser import parse_fastrack_heart_rate
 from backend.api.rescue_service import compute_rescue_priorities
 
 
+logging.basicConfig(level=logging.INFO)
+
+
 def main():
+
+    logging.info("Starting rescue priority computation")
+
     # OPTION 1 — Real Fastrack heart rate data
+    logging.info("Loading worker data from Fastrack export")
+
     workers = parse_fastrack_heart_rate("fastrack_heart_rate.json")
 
     # OPTION 2 — Manual demo data (disabled)
@@ -38,6 +47,8 @@ def main():
         },
     ]
     """
+
+    logging.info("Running rescue prioritization engine")
 
     ranked = compute_rescue_priorities(workers)
 
