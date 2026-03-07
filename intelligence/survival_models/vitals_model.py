@@ -1,21 +1,16 @@
-def vitals_risk_score(heart_rate: int, immobile_minutes: int) -> float:
+def compute_vital_risk(worker):
     """
-    Estimates risk based on physiological signals.
-    Higher score = higher risk.
+    Estimates physiological risk based on heart rate and immobility.
+    Returns a value between 0 and 1.
     """
 
-    risk = 0.0
+    heart_rate = worker.get("heart_rate", 80)
+    immobile_minutes = worker.get("immobile_minutes", 0)
 
-    # Heart rate based risk
-    if heart_rate < 50 or heart_rate > 120:
-        risk += 0.4
-    elif heart_rate < 60 or heart_rate > 100:
-        risk += 0.2
+    hr_risk = min(abs(heart_rate - 80) / 80, 1)
 
-    # Immobility based risk
-    if immobile_minutes > 30:
-        risk += 0.4
-    elif immobile_minutes > 10:
-        risk += 0.2
+    immobility_risk = min(immobile_minutes / 30, 1)
 
-    return min(risk, 1.0)
+    vital_risk = (hr_risk + immobility_risk) / 2
+
+    return vital_risk
