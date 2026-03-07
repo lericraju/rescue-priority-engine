@@ -7,8 +7,13 @@ def parse_fastrack_heart_rate(file_path: str) -> list:
     and convert it into a worker profile for the rescue engine.
     """
 
-    with open(file_path, "r") as f:
-        data = json.load(f)
+    try:
+        with open(file_path, "r") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Heart rate file not found: {file_path}")
+    except json.JSONDecodeError:
+        raise ValueError("Invalid JSON format in heart rate export file")
 
     heart_rates = []
 
@@ -16,7 +21,7 @@ def parse_fastrack_heart_rate(file_path: str) -> list:
         try:
             bpm = point["fitValue"][0]["value"]["fpVal"]
             heart_rates.append(bpm)
-        except (KeyError, IndexError):
+        except (KeyError, IndexError, TypeError):
             continue
 
     if not heart_rates:
