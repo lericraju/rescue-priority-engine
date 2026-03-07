@@ -1,21 +1,25 @@
-from intelligence.inference import estimate_survival
-from intelligence.prioritization.priority_engine import prioritize_workers
+def get_priorities():
+    workers = [
+        {
+            "id": "Worker_A",
+            "heart_rate": 92,
+            "immobile_minutes": 6,
+            "gas_ppm": 180,
+            "gas_exposure_minutes": 12,
+            "oxygen_percent": 14.5,
+            "hypoxia_minutes": 20,
+        },
+        {
+            "id": "Worker_B",
+            "heart_rate": 110,
+            "immobile_minutes": 18,
+            "gas_ppm": 260,
+            "gas_exposure_minutes": 25,
+            "oxygen_percent": 11.0,
+            "hypoxia_minutes": 30,
+        }
+    ]
 
+    ranked = compute_rescue_priorities(workers)
 
-def compute_rescue_priorities(workers: list) -> list:
-    """
-    Computes survival probability and rescue priority
-    for a list of workers.
-    """
-
-    for w in workers:
-        w["survival_probability"] = estimate_survival(
-            w["heart_rate"],
-            w["immobile_minutes"],
-            w["gas_ppm"],
-            w["gas_exposure_minutes"],
-            w["oxygen_percent"],
-            w["hypoxia_minutes"],
-        )
-
-    return prioritize_workers(workers)
+    return ranked
