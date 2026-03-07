@@ -1,51 +1,85 @@
-# System Architecture – Rescue Priority Engine
+# System Architecture
 
-## Overview
+The Rescue Priority Engine is designed as a modular decision-support system
+for prioritizing rescue operations during underground mine disasters.
 
-The system is designed as a modular decision-support pipeline
-for rescue prioritization during underground mine disasters.
+## Architecture Overview
 
----
+The system consists of four major layers:
 
-## Architecture Layers
-
-### 1. Data Layer
-- Physiological data (heart rate, immobility)
-- Environmental data (gas concentration, oxygen level)
-- Data sourced via smartwatches and simulated conditions
+1. Data Ingestion Layer
+2. Backend Coordination Layer
+3. Intelligence Layer
+4. Interface Layer
 
 ---
 
-### 2. Intelligence Layer
-Responsible for survival estimation and rescue prioritization.
+## Data Flow
 
-Modules:
+Wearable Sensor Data
+↓
+Google Fit Export
+↓
+Data Ingestion Parser
+↓
+Backend Coordination Service
+↓
+Intelligence Engine
+↓
+Survival Probability Estimation
+↓
+Rescue Priority Ranking
+↓
+Visualization Dashboard / Mobile Interface
+
+---
+
+## Layer Responsibilities
+
+### Intelligence Layer
+Responsible for survival modelling and rescue prioritization.
+
+Components:
 - Vitals Risk Model
-- Gas Exposure Risk Model
+- Gas Exposure Model
 - Hypoxia Risk Model
-- Survival Probability Aggregator
-- Priority Ranking Engine
+- Survival Probability Model
+- Priority Engine
 
 ---
 
-### 3. Backend Layer
-Coordinates data processing and exposes computation services.
+### Backend Coordination Layer
+Responsible for connecting data ingestion and intelligence modules.
 
-- Accepts worker data
-- Calls intelligence module
-- Returns ranked rescue order
-
----
-
-### 4. Interface Layer (Planned)
-- React Dashboard
-- Flutter Mobile View
-
-These provide visualization only and do not perform computation.
+Components:
+- Rescue Service
+- Execution Runner
+- Simulation Generator
 
 ---
 
-## Execution Flow
+### Data Ingestion Layer
+Responsible for parsing wearable device exports.
 
-Smartwatch Data → Backend Service → Intelligence Layer → 
-Survival Probability → Priority Ranking → Console Output
+Components:
+- Google Fit Parser
+- Fastrack Heart Rate Integration
+
+---
+
+### Interface Layer
+Responsible for presenting rescue priorities to users.
+
+Components:
+- Streamlit Dashboard
+- React Web Interface
+- Flutter Mobile Prototype
+
+---
+
+## Design Principles
+
+- Modular architecture
+- Separation of concerns
+- Explainable decision models
+- Simulation support for testing
