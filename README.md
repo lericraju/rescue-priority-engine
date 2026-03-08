@@ -174,6 +174,12 @@ This repository represents a **stable prototype** with working end-to-end execut
 
 ---
 
+## 📦 Future implementation
+One glove with ESP32 + MAX30102 + MPU6050 sends real heart rate + movement data for one worker
+The other 4 workers in your dashboard stay on the simulation engine (synthetic data)
+The real glove worker shows up distinctly on the dashboard — maybe labelled "LIVE SENSOR" — so the contrast is obvious in a demo
+---
+
 ## ⚠️ Disclaimer
 
 This project is intended for **academic and demonstration purposes only.**
