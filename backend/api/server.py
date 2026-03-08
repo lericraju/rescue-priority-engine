@@ -18,6 +18,14 @@ def root():
     }
 
 
+@app.get("/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "service": "rescue-priority-engine"
+    }
+
+
 @app.get("/api/priorities")
 def priorities():
     logging.info("API request received for rescue priorities")
