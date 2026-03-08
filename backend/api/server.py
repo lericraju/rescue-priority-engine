@@ -7,13 +7,32 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(
     title="Rescue Priority Engine API",
-    description="API for computing rescue priorities during mine disasters",
-    version="1.0"
+    description="""
+AI-powered decision support system for prioritizing rescue operations
+during underground mine disasters.
+
+Features:
+- Survival probability estimation
+- Rescue prioritization ranking
+- Synthetic disaster scenario generation
+- Wearable data ingestion support
+""",
+    version="1.0.0",
+    contact={
+        "name": "Rescue Priority Engine Team",
+        "email": "research@mine-ai.org"
+    },
+    license_info={
+        "name": "MIT License"
+    }
 )
 
 
 @app.get("/")
 def root():
+    """
+    Root endpoint to confirm the API is running.
+    """
     return {
         "message": "Rescue Priority Engine API running"
     }
@@ -21,6 +40,9 @@ def root():
 
 @app.get("/health")
 def health_check():
+    """
+    Health check endpoint used for monitoring backend status.
+    """
     return {
         "status": "healthy",
         "service": "rescue-priority-engine"
@@ -29,6 +51,9 @@ def health_check():
 
 @app.get("/api/priorities")
 def priorities():
+    """
+    Return rescue priorities using the demo dataset.
+    """
     logging.info("API request received for rescue priorities")
 
     ranked = get_priorities()
