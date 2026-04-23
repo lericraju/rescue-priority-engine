@@ -9,7 +9,7 @@ const MissionLog = ({ site }) => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/events?site=${site}`);
+        const res = await fetch(`https://rescue-priority-engine.onrender.com/api/events?site=${site}`);
         if (res.ok) {
           const data = await res.json();
           setLogs(data);
