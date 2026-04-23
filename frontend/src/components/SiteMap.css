@@ -1,0 +1,98 @@
+.site-map-container {
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.map-header h2 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.sites-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.site-sector {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  position: relative;
+  min-height: 120px;
+}
+
+.sector-label {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: var(--bg-color);
+  padding: 0 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+}
+
+.sector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.worker-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dot-id {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.worker-dot.safe { border-left: 3px solid var(--accent-green); }
+.worker-dot.warning { border-left: 3px solid var(--accent-orange); }
+.worker-dot.critical { 
+  border-left: 3px solid var(--accent-red); 
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.worker-dot.critical svg {
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% { color: var(--accent-red); filter: drop-shadow(0 0 0px var(--accent-red)); }
+  50% { color: #fca5a5; filter: drop-shadow(0 0 5px var(--accent-red)); }
+  100% { color: var(--accent-red); filter: drop-shadow(0 0 0px var(--accent-red)); }
+}

@@ -1,0 +1,102 @@
+.mission-log-container {
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.log-header h2 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.log-entries {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  padding-right: 0.5rem;
+}
+
+.log-entries::-webkit-scrollbar {
+  width: 4px;
+}
+
+.log-entries::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.log-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.log-entry.critical {
+  background: rgba(239, 68, 68, 0.05);
+  border-left: 2px solid var(--accent-red);
+}
+
+.log-entry.warning {
+  background: rgba(245, 158, 11, 0.05);
+  border-left: 2px solid var(--accent-orange);
+}
+
+.log-time {
+  color: #71717a;
+  min-width: 50px;
+  font-weight: 600;
+}
+
+.log-worker {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.log-msg {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.no-logs {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+.text-red { color: var(--accent-red); }
+.text-orange { color: var(--accent-orange); }
+.text-blue { color: var(--accent-blue); }

@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════════
+   NEON TACTICAL MAP — MineMap.css
+   ═══════════════════════════════════════════ */
+
+.neon-map-container {
+  position: relative;
+  background: radial-gradient(ellipse at 30% 40%, #061525 0%, #020b14 60%, #000508 100%);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  box-shadow:
+    0 0 0 1px rgba(33, 150, 243, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    inset 0 0 80px rgba(21, 101, 192, 0.05);
+}
+
+/* ── Header ── */
+.neon-map-header {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.12);
+  background: rgba(0, 20, 50, 0.6);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.neon-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #64b5f6;
+  background: rgba(33, 150, 243, 0.07);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid rgba(33, 150, 243, 0.15);
+}
+
+.neon-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.neon-badge-dot.blue  { background: #2196f3; box-shadow: 0 0 6px #2196f3; animation: badge-pulse 2s infinite; }
+.neon-badge-dot.green { background: #10b981; box-shadow: 0 0 6px #10b981; animation: badge-pulse 2s infinite; }
+.neon-badge-dot.amber { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; animation: badge-pulse 0.8s infinite; }
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Map Viewport with 3D perspective ── */
+.neon-map-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+  perspective: 900px;
+}
+
+.neon-perspective-stage {
+  transform: rotateX(38deg) rotateZ(-3deg);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 30px 40px rgba(33, 150, 243, 0.15));
+}
+
+.neon-perspective-stage:hover {
+  transform: rotateX(30deg) rotateZ(-2deg) scale(1.02);
+}
+
+.neon-svg {
+  display: block;
+}
+
+/* ── Pin animations ── */
+.pulse-ring-outer {
+  animation: pin-pulse-outer 2.5s ease-out infinite;
+  transform-origin: center;
+}
+.pulse-ring-inner {
+  animation: pin-pulse-inner 2.5s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pin-pulse-outer {
+  0%   { r: 14; opacity: 0.25; }
+  60%  { r: 22; opacity: 0; }
+  100% { r: 22; opacity: 0; }
+}
+@keyframes pin-pulse-inner {
+  0%   { r: 9; opacity: 0.5; }
+  60%  { r: 14; opacity: 0; }
+  100% { r: 14; opacity: 0; }
+}
+
+.is-critical .pulse-ring-outer {
+  stroke: #ef4444 !important;
+  animation-duration: 1s;
+}
+.is-critical .pulse-ring-inner {
+  stroke: #ef4444 !important;
+  animation-duration: 1s;
+}
+
+.is-selected circle:nth-child(3) {
+  filter: brightness(1.5);
+}
+
+/* Team pin animation */
+.team-pulse-ring {
+  animation: team-pulse 3s ease-out infinite;
+}
+@keyframes team-pulse {
+  0%   { r: 10; opacity: 0.4; }
+  70%  { r: 18; opacity: 0; }
+  100% { r: 18; opacity: 0; }
+}
+
+.dispatching .team-pulse-ring {
+  stroke: #f59e0b !important;
+  animation-duration: 0.7s;
+}
+
+/* ── Gas blob animation ── */
+.gas-blob {
+  animation: gas-drift 4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes gas-drift {
+  0%, 100% { opacity: 1; transform: scale(0.9); }
+  50%       { opacity: 0.8; transform: scale(1.15); }
+}
+
+/* ── Legend ── */
+.neon-map-legend {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.6rem 1.25rem;
+  border-top: 1px solid rgba(33, 150, 243, 0.1);
+  background: rgba(0, 15, 35, 0.8);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.legend-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+
+.legend-chip.safe     { color: #3b82f6; border-color: rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.07); }
+.legend-chip.warning  { color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.07); }
+.legend-chip.critical { color: #ef4444; border-color: rgba(239, 68, 68, 0.3);  background: rgba(239, 68, 68, 0.07);  }
+.legend-chip.team     { color: #10b981; border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.07); }
+.legend-chip.gas      { color: #f97316; border-color: rgba(249, 115, 22, 0.3); background: rgba(249, 115, 22, 0.07); }
+
+.legend-dot-sm {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-chip.safe     .legend-dot-sm { background: #3b82f6; box-shadow: 0 0 4px #3b82f6; }
+.legend-chip.warning  .legend-dot-sm { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
+.legend-chip.critical .legend-dot-sm { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+.legend-chip.team     .legend-dot-sm { background: #10b981; box-shadow: 0 0 4px #10b981; }
+.legend-chip.gas      .legend-dot-sm { background: #f97316; box-shadow: 0 0 4px #f97316; }
+
+/* ── Dispatch banner ── */
+.neon-dispatch-banner {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.92);
+  border: 1.5px solid #f59e0b;
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #f59e0b;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  z-index: 50;
+  white-space: nowrap;
+}
+
+.dispatch-icon {
+  font-size: 1.1rem;
+  animation: badge-pulse 0.7s infinite;
+}
+
+.dispatch-cancel {
+  background: #f59e0b;
+  color: #000;
+  border: none;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.15s;
+}
+.dispatch-cancel:hover { opacity: 0.85; }
+
+/* ── Loading state ── */
+.neon-map-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  color: #1565c0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.neon-loading-bar {
+  width: 180px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2196f3, transparent);
+  background-size: 200% 100%;
+  animation: loading-sweep 1.5s linear infinite;
+  border-radius: 2px;
+}
+
+@keyframes loading-sweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
