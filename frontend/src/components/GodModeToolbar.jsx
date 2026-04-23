@@ -10,7 +10,7 @@ const GodModeToolbar = ({ isSimulating, selectedSite, onSiteChange }) => {
     setLoading(true);
     const endpoint = isSimulating ? 'stop' : 'start';
     try {
-      await fetch(`http://localhost:8000/api/simulation/${endpoint}`, { method: 'POST' });
+      await fetch(`https://rescue-priority-engine.onrender.com/api/simulation/${endpoint}`, { method: 'POST' });
     } catch (err) {
       console.error(`Failed to ${endpoint} simulation:`, err);
     }
@@ -20,7 +20,7 @@ const GodModeToolbar = ({ isSimulating, selectedSite, onSiteChange }) => {
   const handleApplyScenario = async () => {
     setLoading(true);
     try {
-      await fetch(`http://localhost:8000/api/load_scenario?name=${selectedScenario}&site=${selectedSite}`, { 
+      await fetch(`https://rescue-priority-engine.onrender.com/api/load_scenario?name=${selectedScenario}&site=${selectedSite}`, { 
         method: 'POST' 
       });
     } catch (err) {
@@ -32,7 +32,7 @@ const GodModeToolbar = ({ isSimulating, selectedSite, onSiteChange }) => {
   const handleReset = async () => {
     setLoading(true);
     try {
-      await fetch(`http://localhost:8000/api/load_scenario?name=normal&site=${selectedSite}`, { method: 'POST' });
+      await fetch(`https://rescue-priority-engine.onrender.com/api/load_scenario?name=normal&site=${selectedSite}`, { method: 'POST' });
     } catch (err) {
       console.error('Failed to reset:', err);
     }
