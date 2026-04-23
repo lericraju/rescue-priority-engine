@@ -9,7 +9,7 @@ const SurvivalForecast = ({ workerId, site }) => {
         if (!workerId) return;
         const fetchForecast = async () => {
             try {
-                const res = await fetch(`http://localhost:8000/api/simulation/forecast/${workerId}?site=${site}`);
+                const res = await fetch(`https://rescue-priority-engine.onrender.com/api/simulation/forecast/${workerId}?site=${site}`);
                 const forecastData = await res.json();
                 if (Array.isArray(forecastData)) {
                     setData(forecastData);
