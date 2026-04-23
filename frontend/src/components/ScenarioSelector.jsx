@@ -14,7 +14,7 @@ const ScenarioSelector = ({ onScenarioLoad }) => {
   const loadScenario = async (name) => {
     setLoading(name);
     try {
-      const res = await fetch(`http://localhost:8000/api/load_scenario?name=${name}`, { method: 'POST' });
+      const res = await fetch(`https://rescue-priority-engine.onrender.com/api/load_scenario?name=${name}`, { method: 'POST' });
       const data = await res.json();
       if (data.status === 'ok') {
         setActiveScenario(name);
