@@ -8,7 +8,7 @@ const CommunicationCenter = ({ selectedWorker, site }) => {
     const sendCommand = async (command) => {
         if (!selectedWorker) return;
         try {
-            await fetch(`http://localhost:8000/api/command/send?worker_id=${selectedWorker.id}&command=${command}&site=${site}`, {
+            await fetch(`https://rescue-priority-engine.onrender.com/api/command/send?worker_id=${selectedWorker.id}&command=${command}&site=${site}`, {
                 method: 'POST'
             });
             setLastMsg(`Command sent: ${command}`);
