@@ -12,7 +12,7 @@ const AlertPanel = ({ isOpen, onClose }) => {
     if (!isOpen) return;
     const load = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/events?limit=60');
+        const res = await fetch('https://rescue-priority-engine.onrender.com/api/events?limit=60');
         const data = await res.json();
         setEvents([...data].reverse()); // newest first
       } catch (e) {
