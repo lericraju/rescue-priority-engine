@@ -55,7 +55,7 @@ function App() {
 
   const handleDispatch = async (teamId, targetWorkerId) => {
     try {
-      await fetch(`http://localhost:8000/api/dispatch?site=${selectedSite}&team_id=${teamId}&target_worker_id=${targetWorkerId}`, {
+      await fetch(`https://rescue-priority-engine.onrender.com/api/dispatch?site=${selectedSite}&team_id=${teamId}&target_worker_id=${targetWorkerId}`, {
         method: 'POST'
       });
     } catch (err) {
