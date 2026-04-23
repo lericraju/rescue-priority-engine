@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/live_status?site=${selectedSite}`);
+        const res = await fetch(`https://rescue-priority-engine.onrender.com/api/live_status?site=${selectedSite}`);
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
         setWorkers(data.workers);
