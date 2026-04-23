@@ -123,7 +123,7 @@ function App() {
     let reconnectTimeout;
 
     const connect = () => {
-      const ws = new WebSocket("ws://localhost:8000/ws/live_status");
+      const ws = new WebSocket("wss://rescue-priority-engine.onrender.com/ws/live_status");
       wsRef.current = ws;
 
       ws.onopen = () => setConnectionStatus("online");
